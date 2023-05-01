@@ -28,6 +28,18 @@ provider "azurerm" {
 # The prefix of the type maps to the name of the provider. In the example configuration, Terraform manages the azurerm_resource_group resource with the azurerm provider. 
 # Together, the resource type and resource name form a unique ID for the resource. For example, the ID for your network is azurerm_resource_group.rg.
 resource "azurerm_resource_group" "rg" {
-  name     = "learn-terraform-azure"
+  name     = var.resource_group_name
   location = "uksouth"
+
+    tags = {
+    Environment = "Dev"
+    Team = "DevOps"
+  }
+}
+
+resource "azurerm_virtual_network" "vnet" {
+  name                = "${var.resource_group_name}-vnet"
+  address_space       = ["10.0.0.0/16"]
+  location            = "uksouth"
+  resource_group_name = azurerm_resource_group.rg.name
 }
