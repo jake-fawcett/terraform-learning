@@ -13,6 +13,13 @@ terraform {
     }
   }
 
+  cloud {
+    organization = "JakeF191"
+    workspaces {
+      name = "learn-terraform-azure"
+    }
+  }
+
   required_version = ">= 1.1.0"
 }
 
